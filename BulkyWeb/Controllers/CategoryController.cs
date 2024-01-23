@@ -66,5 +66,33 @@ namespace BulkyWeb.Controllers
         }
 
 
+        public IActionResult Delete(int? id)
+        {
+            if (id != null && id != 0)
+            {
+                Category? categoryDb = dbContext.Categories.FirstOrDefault(c => c.Id == id);
+                if (categoryDb != null)
+                {
+                    return View(categoryDb);
+                }
+            }
+            return NotFound();
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteAPI(int? id)
+        {
+            if (id != null && id != 0)
+            {
+                Category? categoryDb = dbContext.Categories.FirstOrDefault(c => c.Id == id);
+                if (categoryDb != null)
+                {
+                    dbContext.Remove(categoryDb);
+                    dbContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return NotFound();
+        }
     }
 }
