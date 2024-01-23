@@ -34,6 +34,7 @@ namespace BulkyWeb.Controllers
             {
                 dbContext.Categories.Add(category);
                 dbContext.SaveChanges();
+                TempData["success"] = "Category Created Successfully.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -59,7 +60,8 @@ namespace BulkyWeb.Controllers
             {
                   dbContext.Update(category);
                     dbContext.SaveChanges();
-                    return RedirectToAction("Index");
+                TempData["success"] = "Category Updated Successfully.";
+                return RedirectToAction("Index");
      
             }
             return View();
@@ -89,6 +91,7 @@ namespace BulkyWeb.Controllers
                 {
                     dbContext.Remove(categoryDb);
                     dbContext.SaveChanges();
+                    TempData["success"] = "Category Deleted Successfully.";
                     return RedirectToAction("Index");
                 }
             }
