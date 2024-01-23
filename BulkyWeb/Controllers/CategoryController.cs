@@ -26,6 +26,10 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
+            if (category.Name == category.DisplayOrder)
+            {
+                ModelState.AddModelError("name", "Name and Order cannot be same");
+            }
             if (ModelState.IsValid)
             {
                 dbContext.Categories.Add(category);
