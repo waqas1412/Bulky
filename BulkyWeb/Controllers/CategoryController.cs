@@ -26,10 +26,10 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-           /* if (category.Name == category.DisplayOrder)
-            {
-                ModelState.AddModelError("name", "Name and Order cannot be same");
-            }*/
+            /* if (category.Name == category.DisplayOrder)
+             {
+                 ModelState.AddModelError("name", "Name and Order cannot be same");
+             }*/
             if (ModelState.IsValid)
             {
                 dbContext.Categories.Add(category);
@@ -38,5 +38,33 @@ namespace BulkyWeb.Controllers
             }
             return View();
         }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id != null && id != 0)
+            {
+                Category? categoryDb = dbContext.Categories.FirstOrDefault(c => c.Id == id);
+                if (categoryDb != null)
+                {
+                    return View(categoryDb);
+                }
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                  dbContext.Update(category);
+                    dbContext.SaveChanges();
+                    return RedirectToAction("Index");
+     
+            }
+            return View();
+        }
+
+
     }
 }
