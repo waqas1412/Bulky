@@ -3,3 +3,6 @@ BulkyWeb/bin/
 BulkyWeb/obj/
 BulkyWeb/wwwroot/lib/
 .idea/
+Bulky.DataAccess/obj/
+Bulky.Models/obj/
+Bulky.Utility/obj/
